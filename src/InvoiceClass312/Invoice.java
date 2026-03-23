@@ -1,3 +1,5 @@
+package InvoiceClass312;
+
 public class Invoice {
     private String num;
     private String description;
