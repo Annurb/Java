@@ -16,8 +16,15 @@ public class HealthProfile{
     private int targetFrequency2;
     private double imc;
 
-    public static void Main(String[] args){
-
+    public HealthProfile(String firstName, String lastName, String sex, int day, int month, int year, double height, double weight){
+      this.firstName = firstName;
+      this.lastName = lastName;
+      this.sex = sex;
+      this.day = day;
+      this.month = month;
+      this.year = year;
+      this.height = height;
+      this.weight = weight;
     }
     // Setters
     public void setFirstName(String firstName){
@@ -70,6 +77,16 @@ public class HealthProfile{
     public double weight(){
         return weight;
     }
+    public void getInfo(){
+        getAge();
+        getMaxFrequency();
+        getTargetFrequency1();
+        getTargetFrequency2();
+        getImc();
+        System.out.printf("Nome do paciente: %s%s%nSexo: %s%n", this.firstName, this.lastName, this.sex);
+        System.out.printf("Data de nascimento: %d/%d/%d%nIdade: %d%n", this.day, this.month, this.year, this.age);
+        System.out.printf("IMC: %f%nFrequência cardíada alvo: %d%nIntervalo de Frequência cardíaca: %d - %d%n", this.imc, this.maxFrequency, this.targetFrequency1, this.targetFrequency2);
+    }
 
     // Calculo da idade
     public int getAge(){
@@ -78,7 +95,7 @@ public class HealthProfile{
         int age1Year;
 
         int reservedDay = now.getDayOfMonth() - day;
-        if reservedDay < 1{
+        if (reservedDay < 1){
             age1Month = now.getMonthValue() - 1;
         }
         else{
@@ -103,11 +120,13 @@ public class HealthProfile{
         return targetFrequency1;
     }
     public int getTargetFrequency2() {
-        targetFrequency2 = (maxFrequency / 100) *85;
+        targetFrequency2 = (maxFrequency *85)/ 100;
         return targetFrequency2;
     }
     public double getImc(){
-        imc = weight/(height**2)
+        imc = weight/(height*height)*10000;
         return imc;
     }
+    //java.time.LocalDate birthDate = java.time.LocalDate.of(year, month, day);
+    //    return java.time.Period.between(birthDate, java.time.LocalDate.now()).getYears();
 }
