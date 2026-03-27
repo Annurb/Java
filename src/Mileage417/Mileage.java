@@ -10,7 +10,6 @@ public class Mileage{
 
 
     public static void main(String[] args){
-        int sair = 0;
         Scanner sc = new Scanner(System.in);
         Mileage person1 = new Mileage();
         System.out.println("Digite os kilometros: ");
