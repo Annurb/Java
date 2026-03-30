@@ -9,7 +9,7 @@ public class EliminacaoDeDuplicatas {
     public static void main(String[] args){
         EliminacaoDeDuplicatas test1 = new EliminacaoDeDuplicatas();
         EliminacaoDeDuplicatas.setAndExibeArray(12);
-        EliminacaoDeDuplicatas.setAndExibeArray(22);
+        EliminacaoDeDuplicatas.setAndExibeArray(12);
         EliminacaoDeDuplicatas.setAndExibeArray(78);
         EliminacaoDeDuplicatas.setAndExibeArray(100);
         EliminacaoDeDuplicatas.setAndExibeArray(100);
@@ -26,8 +26,8 @@ public class EliminacaoDeDuplicatas {
         }
         if(find == false){
             unicos[contador] = number;
+            contador++;
         }
-        contador++;
         for(int i = 0; i< unicos.length; i++){
             if(unicos[i] != 0) {
                 System.out.print(unicos[i] + " ");
