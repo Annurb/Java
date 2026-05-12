@@ -4,6 +4,16 @@
     <exclude-output />
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/src/CalculaMovimentoCavaleiro" />
+      <excludeFolder url="file://$MODULE_DIR$/src/CalculatorCredit418" />
+      <excludeFolder url="file://$MODULE_DIR$/src/EliminacaoDeDuplicatas712" />
+      <excludeFolder url="file://$MODULE_DIR$/src/Fibonacci729" />
+      <excludeFolder url="file://$MODULE_DIR$/src/GraficosDeTartaruga721" />
+      <excludeFolder url="file://$MODULE_DIR$/src/HealthProfile317" />
+      <excludeFolder url="file://$MODULE_DIR$/src/InvoiceClass312" />
+      <excludeFolder url="file://$MODULE_DIR$/src/Mileage417" />
+      <excludeFolder url="file://$MODULE_DIR$/src/PasseioDoCavalo722" />
+      <excludeFolder url="file://$MODULE_DIR$/src/heartRate316" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
