@@ -5,21 +5,6 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        Usuario atendente = new Usuario("Bruno", PerfilUsuario.ATENDENTE);
-        Usuario gerente = new Usuario("Ana", PerfilUsuario.GERENTE);
-
-        System.out.println("PAINEL DO ATENDENTE");
-        PainelAdministrativo painelAtendente = new PainelAdministrativo(atendente);
-        painelAtendente.abrir();
-        painelAtendente.exibirRelatorioDetalhado();
-
-        System.out.println();
-
-        System.out.println("PAINEL DO GERENTE");
-        PainelAdministrativo painelGerente = new PainelAdministrativo(gerente);
-        painelGerente.abrir();
-        painelGerente.exibirRelatorioDetalhado();
-        painelGerente.exportarRelatorioCsv();
 
         // A nova implementação deve ser capaz de fazer:
         Usuario usuario = new Usuario("Ana", PerfilUsuario.GERENTE);
@@ -108,9 +93,49 @@ class Usuario {
  * </p>
  */
 interface RelatorioFinanceiro {
+    String gerarResumo();
+    String gerarDetalhado();
+    String exportarCsv();
 
 }
-class RelatorioFinanceiroDetalhado {
+
+class RelatorioFinanceiroControlado implements RelatorioFinanceiro{
+    Usuario usuario;
+    RelatorioFinanceiroDetalhado relatorioReal;
+    RelatorioFinanceiroControlado(Usuario usuario){
+        this.usuario = usuario;
+    }
+    public String gerarResumo(){
+        if (!usuario.podeAcessarRelatorioFinanceiro()) {
+            return "[ACESSO NEGADO] Usuário sem permissão para resumo financeiro.";
+        }
+
+        return obterRelatorioReal().gerarResumo();
+    }
+    public String gerarDetalhado(){
+        if (!usuario.podeAcessarRelatorioFinanceiro()) {
+            return "[ACESSO NEGADO] Usuário sem permissão para relatorio financeiro detalhado.";
+        }
+
+        return obterRelatorioReal().gerarDetalhado();
+    }
+    public String exportarCsv(){
+        if (!usuario.podeAcessarRelatorioFinanceiro()) {
+            return "[ACESSO NEGADO] Usuário sem permissão para exportar csv.";
+        }
+
+        return obterRelatorioReal().exportarCsv();
+    }
+    public RelatorioFinanceiroDetalhado obterRelatorioReal(){
+        if (this.relatorioReal == null) {
+            this.relatorioReal = new RelatorioFinanceiroDetalhado();
+        }
+
+        return this.relatorioReal;
+    }
+}
+
+class RelatorioFinanceiroDetalhado implements RelatorioFinanceiro{
     private final List<String> linhas = new ArrayList<>();
 
     /**
@@ -201,20 +226,20 @@ class RelatorioFinanceiroDetalhado {
  */
 class PainelAdministrativo {
     private final Usuario usuario;
-    private final RelatorioFinanceiroDetalhado relatorio;
+    private final RelatorioFinanceiro relatorio;
 
     /**
      * Cria o painel administrativo para um usuário.
      *
      * @param usuario usuário autenticado.
      */
-    public PainelAdministrativo(Usuario usuario) {
+    public PainelAdministrativo(Usuario usuario, RelatorioFinanceiro relatorio) {
         if (usuario == null) {
             throw new IllegalArgumentException("O usuário não pode ser nulo.");
         }
 
         this.usuario = usuario;
-        this.relatorio = new RelatorioFinanceiroDetalhado();
+        this.relatorio = relatorio;
     }
 
     /**
@@ -228,10 +253,6 @@ class PainelAdministrativo {
      * Exibe um resumo financeiro.
      */
     public void exibirResumoFinanceiro() {
-        if (!usuario.podeAcessarRelatorioFinanceiro()) {
-            System.out.println("[ACESSO NEGADO] Usuário sem permissão para resumo financeiro.");
-            return;
-        }
 
         System.out.println(relatorio.gerarResumo());
     }
@@ -240,10 +261,6 @@ class PainelAdministrativo {
      * Exibe o relatório financeiro detalhado.
      */
     public void exibirRelatorioDetalhado() {
-        if (!usuario.podeAcessarRelatorioFinanceiro()) {
-            System.out.println("[ACESSO NEGADO] Usuário sem permissão para relatório financeiro detalhado.");
-            return;
-        }
 
         System.out.println(relatorio.gerarDetalhado());
     }
@@ -252,10 +269,6 @@ class PainelAdministrativo {
      * Exporta o relatório financeiro em CSV.
      */
     public void exportarRelatorioCsv() {
-        if (!usuario.podeAcessarRelatorioFinanceiro()) {
-            System.out.println("[ACESSO NEGADO] Usuário sem permissão para exportar relatório financeiro.");
-            return;
-        }
 
         System.out.println(relatorio.exportarCsv());
     }

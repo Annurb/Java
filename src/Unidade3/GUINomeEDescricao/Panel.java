@@ -2,6 +2,8 @@ package GUINomeEDescricao;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Panel extends JFrame {
     private final JLabel label1;
@@ -43,5 +45,27 @@ public class Panel extends JFrame {
         painel3.add(cancel);
         add(painel3, BorderLayout.PAGE_END);
 
+        ButtonHandler handler = new ButtonHandler();
+        ButtonHandler1 handler1 = new ButtonHandler1();
+        ok.addActionListener(handler);
+
+        cancel.addActionListener(handler1);
+
+
     }
+    private class ButtonHandler implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent event){
+            if(textField.getText().trim().isEmpty() || textField2.getText().trim().isEmpty() ) {
+                JOptionPane.showMessageDialog(Panel.this, String.format("Você se esqueceu de preencher"));
+            }
+        }
+    }
+    private class ButtonHandler1 implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent event) {
+            if (!textField.getText().trim().isEmpty()|| !textField2.getText().trim().isEmpty()) {
+                JOptionPane.showMessageDialog(Panel.this, "Você preencheu um dos campos, tem certeza que deseja cancelar?");
+            }
+        }}
 }
