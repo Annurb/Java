@@ -54,7 +54,7 @@ class Usuario {
     private final PerfilUsuario perfil;
 
     /**
-     * Cria um usuário.
+     * Cria um usmentação atual separa produtos simples e kits promocionais. uário.
      *
      * @param nome nome do usuário.
      * @param perfil perfil de acesso do usuário.
