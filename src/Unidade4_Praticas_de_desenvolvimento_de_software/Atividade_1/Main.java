@@ -12,19 +12,20 @@ public class Main {
         Produto monitor = new Produto("Monitor", 1200.00, 3200);
 
         KitPromocional kitHomeOffice = new KitPromocional("Kit Home Office", 10.0);
-        kitHomeOffice.adicionarProduto(notebook);
-        kitHomeOffice.adicionarProduto(teclado);
-        kitHomeOffice.adicionarProduto(mouse);
+
+
+        KitPromocional kitEscritorioCompleto = new KitPromocional("Kit Escritório Completo", 5.0);
+
+        kitEscritorioCompleto.adicionarItem(kitHomeOffice);
+
+        kitEscritorioCompleto.adicionarItem(monitor);
+
+
 
         CarrinhoCompra carrinho = new CarrinhoCompra();
-        carrinho.adicionarProduto(monitor);
-        carrinho.adicionarKit(kitHomeOffice);
 
-        System.out.println("Itens do carrinho:");
-        System.out.println(carrinho.getDescricao());
-
-        System.out.printf("%nPreço total: R$ %.2f%n", carrinho.calcularPrecoTotal());
-        System.out.printf("Peso total: %.0f g%n", carrinho.calcularPesoTotal());
+        carrinho.adicionarItem(kitEscritorioCompleto);
+        carrinho.getDescricao("oi");
 
         /*
          * Novo requisito:
@@ -40,7 +41,10 @@ public class Main {
     }
 }
 interface Component{
-
+    public String getNome() ;
+    public double calcularPreco();
+    public double calcularPesoGramas();
+    public String getDescricao(String recuo);
 }
 class Produto implements Component{
     private final String nome;
@@ -67,15 +71,15 @@ class Produto implements Component{
         return nome;
     }
 
-    public double getPreco() {
+    public double calcularPreco() {
         return preco;
     }
 
-    public double getPesoGramas() {
+    public double calcularPesoGramas() {
         return pesoGramas;
     }
 
-    public String getDescricao() {
+    public String getDescricao(String recuo) {
         return nome + " - R$ " + String.format("%.2f", preco);
     }
 }
@@ -83,7 +87,7 @@ class Produto implements Component{
 class KitPromocional implements Component{
     private final String nome;
     private final double percentualDesconto;
-    private final List<Produto> produtos = new ArrayList<>();
+    private final List<Component> produtos = new ArrayList<>();
 
     public KitPromocional(String nome, double percentualDesconto) {
         if (nome == null || nome.isBlank()) {
@@ -105,7 +109,7 @@ class KitPromocional implements Component{
         return percentualDesconto;
     }
 
-    public void adicionarProduto(Produto produto) {
+    public void adicionarItem(Component produto) {
         if (produto == null) {
             throw new IllegalArgumentException("O produto não pode ser nulo.");
         }
@@ -113,15 +117,15 @@ class KitPromocional implements Component{
         produtos.add(produto);
     }
 
-    public List<Produto> getProdutos() {
+    public List<Component> getProdutos() {
         return Collections.unmodifiableList(produtos);
     }
 
     public double calcularPreco() {
         double total = 0.0;
 
-        for (Produto produto : produtos) {
-            total += produto.getPreco();
+        for (Component produto : produtos) {
+            total += produto.calcularPreco();
         }
 
         return total * (1.0 - percentualDesconto / 100.0);
@@ -130,14 +134,14 @@ class KitPromocional implements Component{
     public double calcularPesoGramas() {
         double total = 0.0;
 
-        for (Produto produto : produtos) {
-            total += produto.getPesoGramas();
+        for (Component produto : produtos) {
+            total += produto.calcularPesoGramas();
         }
 
         return total;
     }
 
-    public String getDescricao() {
+    public String getDescricao(String recuo) {
         StringBuilder descricao = new StringBuilder();
 
         descricao.append(nome)
@@ -146,9 +150,9 @@ class KitPromocional implements Component{
                 .append("% de desconto)")
                 .append(System.lineSeparator());
 
-        for (Produto produto : produtos) {
+        for (Component produto : produtos) {
             descricao.append("  - ")
-                    .append(produto.getDescricao())
+                    .append(produto.getDescricao("Ola"))
                     .append(System.lineSeparator());
         }
 
@@ -157,63 +161,44 @@ class KitPromocional implements Component{
 }
 
 class CarrinhoCompra {
-    private final List<Produto> produtos = new ArrayList<>();
-    private final List<KitPromocional> kits = new ArrayList<>();
-
-    public void adicionarProduto(Produto produto) {
+    private final List<Component> produtos = new ArrayList<>();
+    public void adicionarItem(Component produto) {
         if (produto == null) {
             throw new IllegalArgumentException("O produto não pode ser nulo.");
         }
 
         produtos.add(produto);
     }
-
-    public void adicionarKit(KitPromocional kit) {
-        if (kit == null) {
-            throw new IllegalArgumentException("O kit não pode ser nulo.");
-        }
-
-        kits.add(kit);
+    public List getItens(){
+        return produtos;
     }
 
     public double calcularPrecoTotal() {
         double total = 0.0;
 
-        for (Produto produto : produtos) {
-            total += produto.getPreco();
+        for (Component produto : produtos) {
+            total += produto.calcularPreco();
         }
-
-        for (KitPromocional kit : kits) {
-            total += kit.calcularPreco();
-        }
-
         return total;
     }
 
     public double calcularPesoTotal() {
         double total = 0.0;
 
-        for (Produto produto : produtos) {
-            total += produto.getPesoGramas();
+        for (Component produto : produtos) {
+            total += produto.calcularPesoGramas();
         }
 
-        for (KitPromocional kit : kits) {
-            total += kit.calcularPesoGramas();
-        }
 
         return total;
     }
 
-    public String getDescricao() {
+    public String getDescricao(String recuo) {
         StringBuilder descricao = new StringBuilder();
 
-        for (Produto produto : produtos) {
-            descricao.append(produto.getDescricao())
+        for (Component produto : produtos) {
+            descricao.append(produto.getDescricao("Ola"))
                     .append(System.lineSeparator());
-        }
-
-        for (KitPromocional kit : kits) {
-            descricao.append(kit.getDescricao());
         }
 
         return descricao.toString();
