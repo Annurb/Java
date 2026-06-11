@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+//Composite
 public class Main {
     public static void main(String[] args) {
         Produto notebook = new Produto("Notebook", 3500.00, 1800);
