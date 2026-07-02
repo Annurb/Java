@@ -4,10 +4,8 @@
     <exclude-output />
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/Unidade3/MainForm" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/src/Unidade4_Praticas_de_desenvolvimento_de_software/Atividade_3" />
       <excludeFolder url="file://$MODULE_DIR$/src/Unidade4_Praticas_de_desenvolvimento_de_software/Atividade_5" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Unidade3/GUICombobox" />
       <excludeFolder url="file://$MODULE_DIR$/src/Unidade1e2" />
       <excludeFolder url="file://$MODULE_DIR$/src/Unidade1e2/CalculaMovimentoCavaleiro" />
       <excludeFolder url="file://$MODULE_DIR$/src/Unidade1e2/CalculatorCredit418" />
@@ -21,18 +19,22 @@
       <excludeFolder url="file://$MODULE_DIR$/src/Unidade1e2/Mileage417" />
       <excludeFolder url="file://$MODULE_DIR$/src/Unidade1e2/PasseioDoCavalo722" />
       <excludeFolder url="file://$MODULE_DIR$/src/Unidade1e2/heartRate316" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Unidade3/GUICalculadora1209" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Unidade3/GUINomeEDescricao" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Unidade3/VisualInterface" />
       <excludeFolder url="file://$MODULE_DIR$/src/Unidade4_Praticas_de_desenvolvimento_de_software/Atividade_7" />
       <excludeFolder url="file://$MODULE_DIR$/src/Unidade4_Praticas_de_desenvolvimento_de_software/Atividade_1" />
       <excludeFolder url="file://$MODULE_DIR$/src/Unidade4_Praticas_de_desenvolvimento_de_software/Atividade_2" />
       <excludeFolder url="file://$MODULE_DIR$/src/Unidade4_Praticas_de_desenvolvimento_de_software/Atividade_4" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Unidade3/GUIProfessor" />
-      <excludeFolder url="file://$MODULE_DIR$/src/Unidade3" />
       <excludeFolder url="file://$MODULE_DIR$/src/Unidade4_Praticas_de_desenvolvimento_de_software/Atividade_6" />
+      <excludeFolder url="file://$MODULE_DIR$/src/Unidade4_Praticas_de_desenvolvimento_de_software" />
+      <excludeFolder url="file://$MODULE_DIR$/src/Unidade3/Aulas/GUICombobox" />
+      <excludeFolder url="file://$MODULE_DIR$/src/Unidade3/Aulas/GUICrud" />
+      <excludeFolder url="file://$MODULE_DIR$/src/Unidade3/Aulas/GUINomeEDescricao" />
+      <excludeFolder url="file://$MODULE_DIR$/src/Unidade3/Aulas/GUIProfessor" />
+      <excludeFolder url="file://$MODULE_DIR$/src/Unidade3/Aulas/MainForm" />
+      <excludeFolder url="file://$MODULE_DIR$/src/Unidade3/Aulas/MainForm2" />
+      <excludeFolder url="file://$MODULE_DIR$/src/Unidade3/Aulas/SeletorDeCor" />
+      <excludeFolder url="file://$MODULE_DIR$/src/Unidade3/Aulas/VisualInterface" />
     </content>
-    <content url="file://$MODULE_DIR$/src/Unidade3/MainForm" />
+    <content url="file://$MODULE_DIR$/src/Unidade3/Aulas/MainForm" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
